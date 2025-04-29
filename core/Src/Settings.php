@@ -6,7 +6,7 @@ use Error;
 
 class Settings
 {
-    private array $settings;
+    private array $_settings;
 
     public function __construct(array $settings = [])
     {
