@@ -3,6 +3,7 @@
 namespace Src;
 
 use Exception;
+
 class View
 {
     private string $view = '';
@@ -12,12 +13,12 @@ class View
 
     public function __construct(string $view = '', array $data = [])
     {
+        $this->root = $this->getRoot();
         $this->view = $view;
         $this->data = $data;
-        $this->root = $this->getRoot();
     }
 
-    public function getRoot(): string
+    private function getRoot(): string
     {
         global $app;
         $root = $app->settings->getRootPath();
@@ -34,7 +35,7 @@ class View
     private function getPathToView(string $view = ''): string
     {
         $view = str_replace('.', '/', $view);
-        return $this->getRoot() . "/view.php";
+        return $this->getRoot() . "/$view.php";
     }
 
     public function render(string $view = '', array $data = []): string
