@@ -66,6 +66,24 @@
     .button {
         padding: 8px 40px;
         display: flex;
+        cursor: pointer;
+    }
+    .button-add {
+        padding: 16px 68px;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .main-hello {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 80px;
+        gap: 30px;
+    }
+    .main-hello__title {
+        font-size: 36px;
     }
 </style>
 <body>

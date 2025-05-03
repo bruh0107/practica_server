@@ -13,7 +13,8 @@ class User extends Model implements IdentityInterface
     public $timestamps = false;
     protected $fillable = [
         'login',
-        'password'
+        'password',
+        'role_id'
     ];
 
     protected static function booted()
@@ -38,6 +39,20 @@ class User extends Model implements IdentityInterface
     {
         return self::where(['login' => $credentials['login'],
             'password' => md5($credentials['password'])])->first();
+    }
+
+    public function getRoleId(): int
+    {
+        return $this->role_id;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->getRoleId() === 1;
+    }
+    public function isEmployee(): bool
+    {
+        return $this->getRoleId() === 2;
     }
 }
 
