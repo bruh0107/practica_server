@@ -21,6 +21,11 @@ class Site
         return new View('site.hello', ['message' => 'hello working']);
     }
 
+    public function pipiska()
+    {
+        $view = new View('site.pipiska');
+    }
+
     public function signup(Request $request): string
     {
         if ($request->method==='POST' && User::create($request->all())){
