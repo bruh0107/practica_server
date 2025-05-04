@@ -36,7 +36,7 @@ class Site
         }
 
         if(Auth::attempt($request->all())){
-            app()->route->redirect('/hello');
+            app()->route->redirect('/');
         }
 
         return new View('site.login', ['message' => 'Неверные логин или пароль']);
@@ -45,7 +45,17 @@ class Site
     public function logout(Request $request): void
     {
         Auth::logout();
-        app()->route->redirect('/hello');
+        app()->route->redirect('/');
+    }
+
+    public function addEmployee(Request $request): string
+    {
+
+        if ($request->method === 'POST' && User::create([...$request->all(), 'role_id' => 2])){
+            return new View('site.add-employee', ['message' => 'Сотрудник регистратуры создан']);
+        }
+
+        return new View('site.add-employee');
     }
 
 }

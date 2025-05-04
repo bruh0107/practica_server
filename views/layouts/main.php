@@ -17,6 +17,9 @@
         text-decoration: none;
         color: inherit;
     }
+    body {
+        font-family: 'Arial', sans-serif;
+    }
     .header {
         background: #D9D9D9;
     }
@@ -73,6 +76,7 @@
         border: none;
         font-size: 16px;
         cursor: pointer;
+        background: #D9D9D9;
     }
     .main-hello {
         display: flex;
@@ -85,13 +89,32 @@
     .main-hello__title {
         font-size: 36px;
     }
+    .form-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #D9D9D9;
+        max-width: fit-content;
+        margin: 160px auto 0;
+    }
+    .form-employee {
+        padding: 58px 110px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .form-employee-title {
+        padding: 22px 96px;
+        background: #EBEBEB;
+    }
 </style>
 <body>
 
 <header class="header">
     <div class="container">
         <nav class="nav">
-            <a href="<?= app()->route->getUrl('/hello') ?>" class="logo">ПОЛИКЛИННИКА.СИСТЕМА</a>
+            <a href="<?= app()->route->getUrl('/') ?>" class="logo">ПОЛИКЛИННИКА.СИСТЕМА</a>
             <div class="nav-list">
                 <?php
                 if (!app()->auth::check()):
