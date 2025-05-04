@@ -77,6 +77,8 @@
         font-size: 16px;
         cursor: pointer;
         background: #D9D9D9;
+        display: flex;
+        justify-content: center;
     }
     .main-hello {
         display: flex;
@@ -107,6 +109,11 @@
     .form-employee-title {
         padding: 22px 96px;
         background: #EBEBEB;
+    }
+    .employee-func-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
     }
 </style>
 <body>
