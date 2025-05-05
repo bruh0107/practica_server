@@ -157,6 +157,17 @@
     .create-entry-title {
         text-align: center;
     }
+    .entries-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+    }
+    .entries {
+        margin-top: 60px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
 </style>
 <body>
 

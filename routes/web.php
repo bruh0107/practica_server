@@ -10,4 +10,4 @@ Route::add(['GET', 'POST'], '/add-employee', [Controller\Site::class, 'addEmploy
 Route::add('GET', '/add-doctor', [Controller\Site::class, 'addDoctor'])->middleware('auth', 'employee');
 Route::add('GET', '/add-patient', [Controller\Site::class, 'addPatient'])->middleware('auth', 'employee');
 Route::add('GET', '/create-entry', [Controller\Site::class, 'createEntry'])->middleware('auth', 'employee');
-Route::add('GET', '/entries', [Controller\Site::class, 'entries'])->middleware('auth');
+Route::add('GET', '/entries', [Controller\Site::class, 'getEntries'])->middleware('auth');

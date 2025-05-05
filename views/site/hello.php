@@ -13,7 +13,7 @@
             <a href="<?= app()->route->getUrl('/add-doctor') ?>" class="button-add">Добавить врача</a>
             <a href="<?= app()->route->getUrl('/add-patient') ?>" class="button-add">Добавить пациента</a>
             <a href="<?= app()->route->getUrl('/create-entry') ?>" class="button-add">Создать запись</a>
-            <a href="" class="button-add">Записи</a>
+            <a href="<?= app()->route->getUrl('/entries') ?>" class="button-add">Записи</a>
             <a href="" class="button-add">Пациенты</a>
             <a href="" class="button-add">Врачи</a>
         </div>
