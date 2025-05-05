@@ -11,3 +11,5 @@ Route::add('GET', '/add-doctor', [Controller\Site::class, 'addDoctor'])->middlew
 Route::add('GET', '/add-patient', [Controller\Site::class, 'addPatient'])->middleware('auth', 'employee');
 Route::add('GET', '/create-entry', [Controller\Site::class, 'createEntry'])->middleware('auth', 'employee');
 Route::add('GET', '/entries', [Controller\Site::class, 'getEntries'])->middleware('auth');
+Route::add('GET', '/patients', [Controller\Site::class, 'getPatients'])->middleware('auth');
+Route::add('GET', '/doctors', [Controller\Site::class, 'getDoctors'])->middleware('auth');

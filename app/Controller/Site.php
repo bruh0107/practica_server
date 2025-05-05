@@ -84,4 +84,14 @@ class Site
         return new View('site.entries');
     }
 
+    public function getPatients(): string
+    {
+        return new View('site.patients');
+    }
+
+    public function getDoctors(): string
+    {
+        return new View('site.doctors');
+    }
+
 }

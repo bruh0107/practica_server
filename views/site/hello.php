@@ -3,9 +3,9 @@
         <h2 class="main-hello__title">Здравствуйте, Админ</h2>
         <a href="<?= app()->route->getUrl('/add-employee') ?>" class="button-add">Добавить сотрудника</a>
         <div class="employee-func-list">
-            <a href="" class="button-add">Записи</a>
-            <a href="" class="button-add">Пациенты</a>
-            <a href="" class="button-add">Врачи</a>
+            <a href="<?= app()->route->getUrl('/entries') ?>" class="button-add">Записи</a>
+            <a href="<?= app()->route->getUrl('/patients') ?>" class="button-add">Пациенты</a>
+            <a href="<?= app()->route->getUrl('/doctors') ?>" class="button-add">Врачи</a>
         </div>
     <?php else: ?>
         <h2>Здравствуйте, сотрудник</h2>
@@ -14,8 +14,8 @@
             <a href="<?= app()->route->getUrl('/add-patient') ?>" class="button-add">Добавить пациента</a>
             <a href="<?= app()->route->getUrl('/create-entry') ?>" class="button-add">Создать запись</a>
             <a href="<?= app()->route->getUrl('/entries') ?>" class="button-add">Записи</a>
-            <a href="" class="button-add">Пациенты</a>
-            <a href="" class="button-add">Врачи</a>
+            <a href="<?= app()->route->getUrl('/patients') ?>" class="button-add">Пациенты</a>
+            <a href="<?= app()->route->getUrl('/doctors') ?>" class="button-add">Врачи</a>
         </div>
     <?php endif; ?>
 </div>

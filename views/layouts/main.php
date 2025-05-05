@@ -162,11 +162,44 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 40px;
     }
-    .entries {
+    .entries, .patients, .doctors {
         margin-top: 60px;
         display: flex;
         flex-direction: column;
         gap: 40px;
+    }
+    .entries-title, .patients-title, .doctors-title {
+        font-size: 40px;
+    }
+    .entries-card {
+        padding: 15px;
+        background: #D9D9D9;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+    .entries-card-info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .patients-list, .doctors-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+    }
+    .patients-card, .doctors-card {
+        padding: 15px;
+        background: #D9D9D9;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        font-size: 18px;
+    }
+    .patient-info, .doctors-info {
+        display: flex;
+        gap: 25px;
     }
 </style>
 <body>
