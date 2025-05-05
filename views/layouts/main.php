@@ -40,6 +40,7 @@
     }
     .form-input {
         padding: 4px 2px;
+        font-size: 18px;
     }
     .form {
         display: flex;
@@ -106,7 +107,7 @@
         align-items: center;
         gap: 20px;
     }
-    .form-employee-title {
+    .form-employee-title, .create-entry-title {
         padding: 22px 96px;
         background: #EBEBEB;
     }
@@ -114,6 +115,47 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
+    }
+    .add-doctor, .add-patient {
+        background: #C8C8C8;
+        width: fit-content;
+        margin: 140px auto 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .add-doctor-title, .add-patient-title {
+        font-size: 36px;
+        padding: 21px 146px;
+        background: #EBEBEB;
+        width: fit-content;
+    }
+    .add-doctor-form, .add-patient-form {
+        padding: 50px 82px;
+        font-size: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+        align-items: center;
+    }
+    .add-doctor-info, .add-patient-info {
+        display: flex;
+        gap: 30px;
+    }
+    .create-entry {
+        width: fit-content;
+        margin: 140px auto 0;
+    }
+    .create-entry-form {
+        background: #C8C8C8;
+        padding: 50px 136px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .create-entry-title {
+        text-align: center;
     }
 </style>
 <body>

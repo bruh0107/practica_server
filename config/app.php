@@ -6,5 +6,6 @@ return [
         'auth' => \Middlewares\AuthMiddleware::class,
         'admin' => \Middlewares\AdminMiddleware::class,
         'guest' => \Middlewares\GuestMiddleware::class,
+        'employee' => \Middlewares\EmployeeMiddleware::class,
 ]
 ];

@@ -51,11 +51,37 @@ class Site
     public function addEmployee(Request $request): string
     {
 
-        if ($request->method === 'POST' && User::create([...$request->all(), 'role_id' => 2])){
-            return new View('site.add-employee', ['message' => 'Сотрудник регистратуры создан']);
+        if ($request->method === 'POST'){
+            if (User::query()->where('login', $request->get('login'))->exists()) {
+                return new View('site.add-employee', ['message' => 'Ошибка при создании сотрудника']);
+            }
+
+            if (User::create([...$request->all(), 'role_id' => 2])) {
+                return new View('site.add-employee', ['message' => 'Сотрудник регистратуры создан']);
+            }
         }
 
         return new View('site.add-employee');
+    }
+
+    public function addDoctor(): string
+    {
+        return new View('site.add-doctor');
+    }
+
+    public function addPatient(): string
+    {
+        return new View('site.add-patient');
+    }
+
+    public function createEntry(): string
+    {
+        return new View('site.create-entry');
+    }
+
+    public function getEntries(): string
+    {
+        return new View('site.entries');
     }
 
 }
