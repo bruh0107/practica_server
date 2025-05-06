@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use Model\Post;
+use Model\Doctor;
 use Src\View;
 use Src\Request;
 use Model\User;
@@ -53,7 +53,7 @@ class Site
 
         if ($request->method === 'POST'){
             if (User::query()->where('login', $request->get('login'))->exists()) {
-                return new View('site.add-employee', ['message' => 'Ошибка при создании сотрудника']);
+                return new View('site.add-employee', ['message' => 'Сотрудник с таким логином уже существует']);
             }
 
             if (User::create([...$request->all(), 'role_id' => 2])) {
@@ -64,8 +64,13 @@ class Site
         return new View('site.add-employee');
     }
 
-    public function addDoctor(): string
+    public function addDoctor(Request $request): string
     {
+        if ($request->method === 'POST'){
+            if (Doctor::create($request->all())) {
+                return new View('site.add-doctor', ['message' => 'Доктор успешно создан']);
+            }
+        }
         return new View('site.add-doctor');
     }
 
