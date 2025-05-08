@@ -17,6 +17,6 @@ class Position extends Model
 
     public function DoctorPositions()
     {
-        return $this->hasMany(DoctorPosition::class);
+        return $this->hasMany(DoctorPosition::class, 'position_id');
     }
 }

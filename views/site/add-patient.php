@@ -6,7 +6,8 @@
             <label>Имя <input class="form-input" type="text" name="name" required></label>
             <label>Отчество <input class="form-input" type="text" name="patronym"></label>
         </div>
-        <label>Дата рождения <input class="form-input" type="date" name="birthdate"></label>
-        <button class="button-add">Добавить врача</button>
+        <label>Дата рождения <input class="form-input" type="date" name="birth_date" required></label>
+        <button class="button-add">Добавить пациента</button>
+        <h3><?= $message ?? ''; ?></h3>
     </form>
 </div>

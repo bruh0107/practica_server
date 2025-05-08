@@ -36,4 +36,14 @@ class Doctor extends Model
             'specialization_id'
         );
     }
+
+    public function position()
+    {
+        return $this->belongsToMany(
+            Position::class,
+            'doctor_positions',
+            'doctor_id',
+            'position_id'
+        );
+    }
 }

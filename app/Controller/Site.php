@@ -3,6 +3,11 @@
 namespace Controller;
 
 use Model\Doctor;
+use Model\DoctorPosition;
+use Model\DoctorSpecialization;
+use Model\Patient;
+use Model\Position;
+use Model\Specialization;
 use Src\View;
 use Src\Request;
 use Model\User;
@@ -66,16 +71,36 @@ class Site
 
     public function addDoctor(Request $request): string
     {
+        $props = [
+            'specializations' => Specialization::all(),
+            'positions' => Position::all(),
+        ];
+
         if ($request->method === 'POST'){
-            if (Doctor::create($request->all())) {
-                return new View('site.add-doctor', ['message' => 'Доктор успешно создан']);
+            $doctor = Doctor::create([...$request->all(), 'user_id' => Auth::user()->id]);
+
+            if ($doctor) {
+                DoctorPosition::create([
+                   'doctor_id' => $doctor->id,
+                   'position_id' => $request->position_id,
+                ]);
+                DoctorSpecialization::create([
+                    'doctor_id' => $doctor->id,
+                    'specialization_id' => $request->specialization_id,
+                ]);
+                return new View('site.add-doctor', [...$props, 'message' => 'Доктор успешно создан']);
             }
         }
-        return new View('site.add-doctor');
+        return new View('site.add-doctor', $props);
     }
 
-    public function addPatient(): string
+    public function addPatient(Request $request): string
     {
+        if ($request->method === 'POST'){
+            if (Patient::create([...$request->all(), 'user_id' => Auth::user()->id])) {
+                return new View('site.add-patient', ['message' => 'Пациент успешно создан']);
+            }
+        }
         return new View('site.add-patient');
     }
 
