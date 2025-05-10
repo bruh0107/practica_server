@@ -121,11 +121,11 @@ class Site
         return new View('site.create-entry', $props);
     }
 
-    public function getEntries(Request $request): string
+    public function getEntries($message): string
     {
         $entries = Entry::with(['entryDoctor', 'entryPatient', 'entryStatus'])->get();
 
-        return new View('site.entries', ['entries' => $entries]);
+        return new View('site.entries', ['entries' => $entries, 'message' => $message]);
     }
 
     public function getPatients(): string
@@ -136,8 +136,17 @@ class Site
 
     public function getDoctors(): string
     {
-        $doctors = Doctor::with(['specializations', 'position'])->get();
-        return new View('site.doctors', ['doctors' => $doctors]);
+        $search = $_GET['search'] ?? null;
+
+        $query = Doctor::with(['specializations', 'position']);
+
+        if ($search) {
+            $query->where('surname', 'like', "%$search%");
+        }
+
+        $doctors = $query->get();
+
+        return new View('site.doctors', ['doctors' => $doctors, 'search' => $search]);
     }
 
     public function getDoctorById($id): string
@@ -147,5 +156,21 @@ class Site
                 $query->distinct();
             }])->find($id)
         ]);
+    }
+
+    public function getPatientById($id): string
+    {
+        return new View('site.patientId', [
+            'patient' => Patient::with(['doctors', 'entries' => function($query) {
+                $query->distinct();
+            }])->find($id)
+            ]
+        );
+    }
+
+    public function cancelEntry($id): string
+    {
+        Entry::find($id)->update(['status_id' => 1]);
+        return $this->getEntries('Запись отменена');
     }
 }

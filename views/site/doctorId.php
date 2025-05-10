@@ -13,7 +13,7 @@
             <?php foreach ($doctor->patients as $patient): ?>
                 <div class="patients-card">
                     <p class="patients-card-title">Пациент №<?= $patient->id ?></p>
-                    <div class="patient-info">
+                    <div class="patients-card-info">
                         <p>Фамилия: <?= $patient->surname ?></p>
                         <p>Имя: <?= $patient->name ?></p>
                         <?php if (!empty($patient->patronym)): ?>

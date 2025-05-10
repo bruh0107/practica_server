@@ -71,6 +71,8 @@
         padding: 8px 40px;
         display: flex;
         cursor: pointer;
+        border: 1px solid black;
+        background: #eaeaea;
     }
     .button-add {
         padding: 16px 68px;
@@ -162,7 +164,7 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 40px;
     }
-    .entries, .patients, .doctors, .doctor-id {
+    .entries, .patients, .doctors, .doctor-id, .patient-id {
         margin-top: 60px;
         display: flex;
         flex-direction: column;
@@ -197,7 +199,7 @@
         gap: 15px;
         font-size: 18px;
     }
-    .patient-info, .doctors-info {
+    .doctors-info, .patients-card-info {
         display: flex;
         gap: 25px;
     }
@@ -214,6 +216,44 @@
         flex-direction: column;
         gap: 10px;
         font-size: 20px;
+    }
+    .list-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .patient-info-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .patient-info {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 50px;
+    }
+
+    .doctors-search {
+        margin-bottom: 20px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .doctors-search input {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        flex-grow: 1;
+        max-width: 300px;
+    }
+
+    .doctors-search button {
+        padding: 8px 16px;
+        background-color: #7f7f7f;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
     }
 </style>
 <body>

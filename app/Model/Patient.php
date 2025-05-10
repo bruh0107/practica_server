@@ -24,4 +24,19 @@ class Patient extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function doctors()
+    {
+        return $this->belongsToMany(
+            Doctor::class,
+            'entries',
+            'patient_id',
+            'doctor_id',
+        )->distinct();
+    }
+
+    public function entries()
+    {
+        return $this->hasMany(Entry::class, 'patient_id');
+    }
 }
