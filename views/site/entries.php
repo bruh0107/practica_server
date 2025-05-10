@@ -1,75 +1,22 @@
 <div class="entries">
     <h2 class="entries-title">Записи</h2>
     <div class="entries-list">
-        <div class="entries-card">
-            <div class="entries-card-info">
-                <p>Запись №1</p>
-                <p>Статус: активна</p>
-                <?php if (app()->auth::user()->isEmployee()): ?>
-                    <button class="button">Отменить запись</button>
-                <?php endif; ?>
+        <?php foreach ($entries as $entry): ?>
+            <div class="entries-card">
+                <div class="entries-card-info">
+                    <p>Запись №<?= $entry->id ?></p>
+                    <p>Статус: <?= $entry->entryStatus->name ?? 'Не указан' ?></p>
+                    <?php if (app()->auth::user()->isEmployee()): ?>
+                        <button class="button">Отменить запись</button>
+                    <?php endif; ?>
+                </div>
+                <div class="entries-card-info">
+                    <p>Пациент: <?= $entry->entryPatient->surname ?? '' ?> <?= $entry->entryPatient->name ?? '' ?> <?= $entry->entryPatient->patronymic ?? '' ?></p>
+                    <p>Врач: <?= $entry->entryDoctor->surname ?? '' ?> <?= $entry->entryDoctor->name ?? '' ?> <?= $entry->entryDoctor->patronymic ?? '' ?></p>
+                    <p>Время: <?= date('H:i', strtotime($entry->time)) ?></p>
+                    <p>Дата: <?= date('d.m.Y', strtotime($entry->time)) ?></p>
+                </div>
             </div>
-            <div class="entries-card-info">
-                <p>Пациент: Иванов Иван Иванович</p>
-                <p>Врач: Собакин Собак Собакевич</p>
-                <p>Время: 12:30</p>
-            </div>
-        </div>
-        <div class="entries-card">
-            <div class="entries-card-info">
-                <p>Запись №1</p>
-                <p>Статус: активна</p>
-                <?php if (app()->auth::user()->isEmployee()): ?>
-                    <button class="button">Отменить запись</button>
-                <?php endif; ?>
-            </div>
-            <div class="entries-card-info">
-                <p>Пациент: Иванов Иван Иванович</p>
-                <p>Врач: Собакин Собак Собакевич</p>
-                <p>Время: 12:30</p>
-            </div>
-        </div>
-        <div class="entries-card">
-            <div class="entries-card-info">
-                <p>Запись №1</p>
-                <p>Статус: активна</p>
-                <?php if (app()->auth::user()->isEmployee()): ?>
-                    <button class="button">Отменить запись</button>
-                <?php endif; ?>
-            </div>
-            <div class="entries-card-info">
-                <p>Пациент: Иванов Иван Иванович</p>
-                <p>Врач: Собакин Собак Собакевич</p>
-                <p>Время: 12:30</p>
-            </div>
-        </div>
-        <div class="entries-card">
-            <div class="entries-card-info">
-                <p>Запись №1</p>
-                <p>Статус: активна</p>
-                <?php if (app()->auth::user()->isEmployee()): ?>
-                    <button class="button">Отменить запись</button>
-                <?php endif; ?>
-            </div>
-            <div class="entries-card-info">
-                <p>Пациент: Иванов Иван Иванович</p>
-                <p>Врач: Собакин Собак Собакевич</p>
-                <p>Время: 12:30</p>
-            </div>
-        </div>
-        <div class="entries-card">
-            <div class="entries-card-info">
-                <p>Запись №1</p>
-                <p>Статус: активна</p>
-                <?php if (app()->auth::user()->isEmployee()): ?>
-                    <button class="button">Отменить запись</button>
-                <?php endif; ?>
-            </div>
-            <div class="entries-card-info">
-                <p>Пациент: Иванов Иван Иванович</p>
-                <p>Врач: Собакин Собак Собакевич</p>
-                <p>Время: 12:30</p>
-            </div>
-        </div>
+        <?php endforeach; ?>
     </div>
 </div>

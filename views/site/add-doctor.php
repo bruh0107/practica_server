@@ -22,6 +22,7 @@
                     <option value="<?= $specialization->id ?>"><?= $specialization->name ?></option>
                 <?php endforeach; ?>
             </select>
+            <input class="form-input" type="file" name="avatar">
         </label>
         <button class="button-add">Добавить врача</button>
         <h3><?= $message ?? ''; ?></h3>

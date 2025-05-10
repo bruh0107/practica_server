@@ -20,6 +20,7 @@ class Doctor extends Model
         'patronym',
         'birth_date',
         'user_id',
+        'avatar',
     ];
 
     public function doctorUser(): BelongsTo
@@ -44,6 +45,16 @@ class Doctor extends Model
             'doctor_positions',
             'doctor_id',
             'position_id'
+        );
+    }
+
+    public function patients()
+    {
+        return $this->belongsToMany(
+            Patient::class,
+            'entries',
+            'doctor_id',
+            'patient_id'
         );
     }
 }

@@ -162,7 +162,7 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 40px;
     }
-    .entries, .patients, .doctors {
+    .entries, .patients, .doctors, .doctor-id {
         margin-top: 60px;
         display: flex;
         flex-direction: column;
@@ -184,7 +184,7 @@
         flex-direction: column;
         gap: 5px;
     }
-    .patients-list, .doctors-list {
+    .doctors-list {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 40px;
@@ -200,6 +200,20 @@
     .patient-info, .doctors-info {
         display: flex;
         gap: 25px;
+    }
+    .patients-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+    .patients-card-title {
+        font-size: 22px;
+    }
+    .doctor-id-info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 20px;
     }
 </style>
 <body>

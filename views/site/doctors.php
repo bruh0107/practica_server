@@ -1,65 +1,27 @@
 <div class="doctors">
     <h2 class="doctors-title">Врачи</h2>
     <div class="doctors-list">
-        <div class="doctors-card">
-            <p>Врач №1</p>
-            <div class="doctors-info">
-                <p>Фамилия: Иванова</p>
-                <p>Имя: Ивана</p>
-                <p>Отчество: Ивановна</p>
-            </div>
-            <div class="doctors-info">
-                <p>Должность: старший врач</p>
-                <p>Специализация: Терапевт</p>
-            </div>
-        </div>
-        <div class="doctors-card">
-            <p>Врач №1</p>
-            <div class="doctors-info">
-                <p>Фамилия: Иванова</p>
-                <p>Имя: Ивана</p>
-                <p>Отчество: Ивановна</p>
-            </div>
-            <div class="doctors-info">
-                <p>Должность: старший врач</p>
-                <p>Специализация: Терапевт</p>
-            </div>
-        </div>
-        <div class="doctors-card">
-            <p>Врач №1</p>
-            <div class="doctors-info">
-                <p>Фамилия: Иванова</p>
-                <p>Имя: Ивана</p>
-                <p>Отчество: Ивановна</p>
-            </div>
-            <div class="doctors-info">
-                <p>Должность: старший врач</p>
-                <p>Специализация: Терапевт</p>
-            </div>
-        </div>
-        <div class="doctors-card">
-            <p>Врач №1</p>
-            <div class="doctors-info">
-                <p>Фамилия: Иванова</p>
-                <p>Имя: Ивана</p>
-                <p>Отчество: Ивановна</p>
-            </div>
-            <div class="doctors-info">
-                <p>Должность: старший врач</p>
-                <p>Специализация: Терапевт</p>
-            </div>
-        </div>
-        <div class="doctors-card">
-            <p>Врач №1</p>
-            <div class="doctors-info">
-                <p>Фамилия: Иванова</p>
-                <p>Имя: Ивана</p>
-                <p>Отчество: Ивановна</p>
-            </div>
-            <div class="doctors-info">
-                <p>Должность: старший врач</p>
-                <p>Специализация: Терапевт</p>
-            </div>
-        </div>
+        <?php foreach ($doctors as $doctor): ?>
+            <a class="doctors-card" href="<?= app()->route->getUrl("/doctors/" . "$doctor->id") ?>">
+                <p>Врач №<?= $doctor->id ?></p>
+                <div class="doctors-info">
+                    <p>Фамилия: <?= $doctor->surname ?></p>
+                    <p>Имя: <?= $doctor->name ?></p>
+                    <?php if (!empty($doctor->patronym)): ?>
+                        <p>Отчество: <?= $doctor->patronym ?></p>
+                    <?php endif; ?>
+                </div>
+                <div class="doctors-info">
+                    <?php if ($doctor->position->isNotEmpty()): ?>
+                        <p>Должность: <?= $doctor->position->first()->name ?></p>
+                    <?php endif; ?>
+                    <?php if ($doctor->specializations->isNotEmpty()): ?>
+                        <p>Специализация:
+                            <?= implode(', ', $doctor->specializations->pluck('name')->toArray()) ?>
+                        </p>
+                    <?php endif; ?>
+                </div>
+            </a>
+        <?php endforeach; ?>
     </div>
 </div>

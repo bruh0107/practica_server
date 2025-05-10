@@ -30,6 +30,9 @@ class Entry extends Model
         return $this->belongsTo(Patient::class, 'patient_id');
     }
 
-
+    public function entryStatus(): BelongsTo
+    {
+        return $this->belongsTo(Status::class, 'status_id');
+    }
 
 }

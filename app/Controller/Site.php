@@ -5,9 +5,11 @@ namespace Controller;
 use Model\Doctor;
 use Model\DoctorPosition;
 use Model\DoctorSpecialization;
+use Model\Entry;
 use Model\Patient;
 use Model\Position;
 use Model\Specialization;
+use Model\Status;
 use Src\View;
 use Src\Request;
 use Model\User;
@@ -104,24 +106,46 @@ class Site
         return new View('site.add-patient');
     }
 
-    public function createEntry(): string
+    public function createEntry(Request $request): string
     {
-        return new View('site.create-entry');
+        $props = [
+            'patients' => Patient::all(),
+            'doctors' => Doctor::all(),
+        ];
+
+        if ($request->method === 'POST'){
+            if (Entry::create([...$request->all(), 'status_id' => 2])) {
+                return new View('site.create-entry', [...$props, 'message' => 'Запись создана']);
+            }
+        }
+        return new View('site.create-entry', $props);
     }
 
-    public function getEntries(): string
+    public function getEntries(Request $request): string
     {
-        return new View('site.entries');
+        $entries = Entry::with(['entryDoctor', 'entryPatient', 'entryStatus'])->get();
+
+        return new View('site.entries', ['entries' => $entries]);
     }
 
     public function getPatients(): string
     {
-        return new View('site.patients');
+        $patients = Patient::all();
+        return new View('site.patients', ['patients' => $patients]);
     }
 
     public function getDoctors(): string
     {
-        return new View('site.doctors');
+        $doctors = Doctor::with(['specializations', 'position'])->get();
+        return new View('site.doctors', ['doctors' => $doctors]);
     }
 
+    public function getDoctorById($id): string
+    {
+        return new View('site.doctorId', [
+            'doctor' => Doctor::with(['specializations', 'position', 'patients' => function($query) {
+                $query->distinct();
+            }])->find($id)
+        ]);
+    }
 }
