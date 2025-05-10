@@ -10,6 +10,7 @@ use Model\Patient;
 use Model\Position;
 use Model\Specialization;
 use Model\Status;
+use Src\Validator\Validator;
 use Src\View;
 use Src\Request;
 use Model\User;
@@ -42,6 +43,17 @@ class Site
             return new View('site.login');
         }
 
+        $validator  = new Validator($request->all(), [
+            'login' => ['required'],
+            'password' => ['required'],
+        ], [
+            'required' => 'Поле :field обязательно',
+        ]);
+
+        if($validator->fails()){
+            return (new View())->render('site.login', ['errors' => $validator->errors()]);
+        }
+
         if(Auth::attempt($request->all())){
             app()->route->redirect('/');
         }
@@ -59,8 +71,19 @@ class Site
     {
 
         if ($request->method === 'POST'){
-            if (User::query()->where('login', $request->get('login'))->exists()) {
-                return new View('site.add-employee', ['message' => 'Сотрудник с таким логином уже существует']);
+
+            $validator  = new Validator($request->all(), [
+                'login' => ['required', 'unique:users,login'],
+                'password' => ['required', 'min:6', 'max:20'],
+            ], [
+                'required' => 'Поле :field обязательно',
+                'unique' => 'Сотрудник с таким логином уже существует',
+                'min' => 'Поле :field должно содержать хотя бы 6 символов',
+                'max' => 'Поле :field может содержать максимум 20 символов',
+            ]);
+
+            if($validator->fails()){
+                return (new View())->render('site.add-employee', ['errors' => $validator->errors()]);
             }
 
             if (User::create([...$request->all(), 'role_id' => 2])) {
@@ -79,6 +102,20 @@ class Site
         ];
 
         if ($request->method === 'POST'){
+            $validator  = new Validator($request->all(), [
+                'surname' => ['required'],
+                'name' => ['required'],
+                'birth_date' => ['required'],
+                'position_id' => ['required'],
+                'specialization_id' => ['required'],
+            ], [
+                'required' => 'Поле :field обязательно'
+            ]);
+
+            if($validator->fails()){
+                return (new View())->render('site.add-doctor', [...$props, 'errors' => $validator->errors()]);
+            }
+
             $doctor = Doctor::create([...$request->all(), 'user_id' => Auth::user()->id]);
 
             if ($doctor) {
@@ -99,6 +136,18 @@ class Site
     public function addPatient(Request $request): string
     {
         if ($request->method === 'POST'){
+            $validator  = new Validator($request->all(), [
+                'surname' => ['required'],
+                'name' => ['required'],
+                'birth_date' => ['required'],
+            ], [
+                'required' => 'Поле :field обязательно'
+            ]);
+
+            if($validator->fails()){
+                return (new View())->render('site.add-patient', ['errors' => $validator->errors()]);
+            }
+
             if (Patient::create([...$request->all(), 'user_id' => Auth::user()->id])) {
                 return new View('site.add-patient', ['message' => 'Пациент успешно создан']);
             }
@@ -114,6 +163,18 @@ class Site
         ];
 
         if ($request->method === 'POST'){
+            $validator  = new Validator($request->all(), [
+                'patient_id' => ['required'],
+                'doctor_id' => ['required'],
+                'time' => ['required'],
+            ], [
+                'required' => 'Поле :field обязательно'
+            ]);
+
+            if($validator->fails()){
+                return (new View())->render('site.create-entry', [...$props, 'errors' => $validator->errors()]);
+            }
+
             if (Entry::create([...$request->all(), 'status_id' => 2])) {
                 return new View('site.create-entry', [...$props, 'message' => 'Запись создана']);
             }
