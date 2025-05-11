@@ -9,20 +9,14 @@ use Model\Entry;
 use Model\Patient;
 use Model\Position;
 use Model\Specialization;
-use Model\Status;
-use Src\Validator\Validator;
 use Src\View;
 use Src\Request;
 use Model\User;
 use Src\Auth\Auth;
+use function Validator\createValidator;
 
 class Site
 {
-    public function index(Request $request): string
-    {
-        $posts = Post::where('id', $request->id)->get();
-        return (new View())->render('site.post', ['posts' => $posts]);
-    }
 
     public function hello(): string
     {
@@ -43,7 +37,7 @@ class Site
             return new View('site.login');
         }
 
-        $validator  = new Validator($request->all(), [
+        $validator  = createValidator($request->all(), [
             'login' => ['required'],
             'password' => ['required'],
         ], [
@@ -72,7 +66,7 @@ class Site
 
         if ($request->method === 'POST'){
 
-            $validator  = new Validator($request->all(), [
+            $validator  = createValidator($request->all(), [
                 'login' => ['required', 'unique:users,login'],
                 'password' => ['required', 'min:6', 'max:20'],
             ], [
@@ -102,7 +96,7 @@ class Site
         ];
 
         if ($request->method === 'POST'){
-            $validator  = new Validator($request->all(), [
+            $validator  = createValidator($request->all(), [
                 'surname' => ['required'],
                 'name' => ['required'],
                 'birth_date' => ['required'],
@@ -136,7 +130,7 @@ class Site
     public function addPatient(Request $request): string
     {
         if ($request->method === 'POST'){
-            $validator  = new Validator($request->all(), [
+            $validator  = createValidator($request->all(), [
                 'surname' => ['required'],
                 'name' => ['required'],
                 'birth_date' => ['required'],
@@ -163,7 +157,7 @@ class Site
         ];
 
         if ($request->method === 'POST'){
-            $validator  = new Validator($request->all(), [
+            $validator  = createValidator($request->all(), [
                 'patient_id' => ['required'],
                 'doctor_id' => ['required'],
                 'time' => ['required'],
