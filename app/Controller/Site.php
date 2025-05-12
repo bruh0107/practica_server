@@ -189,9 +189,9 @@ class Site
         return new View('site.patients', ['patients' => $patients]);
     }
 
-    public function getDoctors(): string
+    public function getDoctors(Request $request): string
     {
-        $search = $_GET['search'] ?? null;
+        $search = $request->search ?? null;
 
         $query = Doctor::with(['specializations', 'position']);
 
