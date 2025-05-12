@@ -18,7 +18,7 @@ class PatientTest extends TestCase
         $dbConfig = [
             'driver' => 'mysql',
             'host' => 'localhost',
-            'database' => 'server',
+            'database' => 'mvc',
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',
@@ -39,7 +39,9 @@ class PatientTest extends TestCase
             }
         }
     }
-
+    /**
+     * @dataProvider patientProvider
+     */
     public function testAddPatient(): void
     {
         $patientData = [
@@ -79,12 +81,35 @@ class PatientTest extends TestCase
                 'patronym' => '',
                 'birth_date' => '',
             ],
-            '{
-            "surname":["Поле surname обязательно"], 
-            "name":["Поле name обязательно"],
-            ""
-            }'
-            ]
+                '{"surname":["Поле surname обязательно"],"name":["Поле name обязательно"],"birth_date":["Поле birth_date обязательно"]}'
+            ],
+
+            ['POST', [
+                'surname' => 'TestSurname',
+                'name' => 'TestName',
+                'patronym' => 'TestPatronym',
+                'birth_date' => '2123-10-20',
+            ],
+                '{"birth_date":["Дата не может быть в будущем"]}'
+            ],
+
+            ['POST', [
+                'surname' => 'TestSurname',
+                'name' => 'TestName',
+                'patronym' => 'TestPatronym',
+                'birth_date' => '1922-10-20',
+            ], 'Location: /add-patient']
+
         ];
+    }
+
+    protected function tearDown(): void
+    {
+        Patient::where([
+        'surname' => 'TestSurname',
+        'name' => 'TestName',
+        'patronym' => 'TestPatronym',
+        'birth_date' => '1922-10-20',
+    ])->delete();
     }
 }
