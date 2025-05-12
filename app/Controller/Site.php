@@ -99,11 +99,12 @@ class Site
             $validator  = createValidator($request->all(), [
                 'surname' => ['required'],
                 'name' => ['required'],
-                'birth_date' => ['required'],
+                'birth_date' => ['required', 'max_today'],
                 'position_id' => ['required'],
                 'specialization_id' => ['required'],
             ], [
-                'required' => 'Поле :field обязательно'
+                'required' => 'Поле :field обязательно',
+                'max_today' => 'Дата не может быть быть в будущем'
             ]);
 
             if($validator->fails()){
@@ -133,9 +134,10 @@ class Site
             $validator  = createValidator($request->all(), [
                 'surname' => ['required'],
                 'name' => ['required'],
-                'birth_date' => ['required'],
+                'birth_date' => ['required', 'max_today'],
             ], [
-                'required' => 'Поле :field обязательно'
+                'required' => 'Поле :field обязательно',
+                'max_today' => 'Дата не может быть быть в будущем'
             ]);
 
             if($validator->fails()){
