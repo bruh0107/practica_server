@@ -41,6 +41,7 @@ class PatientTest extends TestCase
     }
     /**
      * @dataProvider patientProvider
+     * @runInSeparateProcess
      */
     public function testAddPatient(): void
     {
