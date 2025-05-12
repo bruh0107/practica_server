@@ -137,7 +137,7 @@ class Site
                 'birth_date' => ['required', 'max_today'],
             ], [
                 'required' => 'Поле :field обязательно',
-                'max_today' => 'Дата не может быть быть в будущем'
+                'max_today' => 'Дата не может быть в будущем'
             ]);
 
             if($validator->fails()){
